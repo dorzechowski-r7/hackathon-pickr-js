@@ -18,7 +18,7 @@ const NominationChooser = PickrView.extend({
 
     onSubmitNomination(event) {
         this.nominationModel.set("receiverId", this.model.get("id"));
-        this.nominationModel.set("giverId", "1");
+        this.nominationModel.set("giverId", "e95939a0-f0f7-4a6e-ae14-1c0363123cc3");
         this.nominationModel.set("comment", this.$(".note").val());
         this.nominationModel.set("award", $("input[checked]").attr("data-type"));
         this.nominationModel.save({}, {

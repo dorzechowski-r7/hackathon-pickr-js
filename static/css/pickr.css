@@ -1,10 +1,13 @@
 #app {
     width: 75%;
-    min-height: 100%;
-    min-height: 100vh;
     margin-left: auto;
     margin-right: auto;
+    min-height: 100%;
+    min-height: 100vh;
+    background-image: url(/images/landing-page.png);
+}
 
+foo {
     background: #969eaa; /* Old browsers */
     background: -moz-linear-gradient(45deg, #969eaa 0%, #e4eef4 50%, #b9d5e9 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(45deg, #969eaa 0%,#e4eef4 50%,#b9d5e9 100%); /* Chrome10-25,Safari5.1-6 */
@@ -12,10 +15,35 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#969eaa', endColorstr='#b9d5e9',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
+#app img.logo {
+    position: relative;
+    width: 25%;
+}
+
 .search-result {
-    margin-bottom: 8px;
-    border-bottom: 1px solid green;
+    margin-bottom: 16px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #808080;
     cursor: pointer;
+}
+
+.search-result img {
+    width: 64px;
+    height: 64px;
+    margin-right: 16px;
+}
+
+.search-result .name {
+    font-weight: 500;
+    font-size: 125%;
+}
+
+.search-result .dept {
+    font-weight: 300;
+}
+
+.home-view .awesome, .home-view input[type='text'] {
+    font-size: 250%;
 }
 
 .home-view .container {
@@ -32,9 +60,57 @@
     width: 100%;
 }
 
+.person-view {
+    min-height: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.person-view img {
+    width: 128px;
+    height: 128px;
+    cursor: pointer;
+}
+
 .person-view .row > div {
 }
 
-.hidden {
-    display: none;
+.person-view .name {
+    text-align: center;
+    font-size: 200%;
+}
+
+.person-view .dept {
+    font-size: 125%;
+}
+
+.pick-view .note-container {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 64px;
+}
+
+.pick-view textarea {
+    width: 100%;
+}
+
+.nomination-view {
+    padding-top: 16px;
+}
+
+.nomination-view label img {
+    height: 64px;
+}
+
+.nomination-view .note-container {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 64px;
+}
+
+.nomination-view textarea {
+    width: 100%;
 }

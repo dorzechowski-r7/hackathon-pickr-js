@@ -5,9 +5,9 @@ import PickModel from "./PickModel";
 
 const PickChooser = PickrView.extend({
     template: "templates/picks.html",
+    className: "pick-view",
 
     events: {
-        "click .pick": "onSelectPick",
         "click .submit-pick": "onSubmitPick"
     },
 
@@ -15,20 +15,11 @@ const PickChooser = PickrView.extend({
         this.pickModel = new PickModel();
     },
 
-    onSelectPick(event) {
-        const pickType = $(event.currentTarget).attr("data-type");
-        console.log(pickType);
-        this.$(".why")
-            .removeClass("hidden");
-        this.$(".note")
-            .focus();
-    },
-
     onSubmitPick(event) {
         this.pickModel.set("receiverId", this.model.get("id"));
-        this.pickModel.set("giverId", "1");
+        this.pickModel.set("giverId", "e95939a0-f0f7-4a6e-ae14-1c0363123cc3");
         this.pickModel.set("comment", this.$(".note").val());
-        this.pickModel.save({
+        this.pickModel.save({}, {
             success: () => {
                 Backbone.navigate("home", {
                     trigger: true

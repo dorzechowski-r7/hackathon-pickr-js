@@ -40,33 +40,43 @@ app.get("/api/1/login", auth.authenticate("saml", {
         .end();
 });
 */
-app.get("/api/1/people/:id?"/*, auth.protected*/, (req, res) => {
-    if (req.params.id) {
+app.get("/api/1/people/:id", (req, res) => {
+    if (req.query.namePrefix) {
+        res.status(200)
+            .json([{
+                "id": "6042533b-f529-4da1-8775-a1c35ae91e7a",
+                "firstName": "Sam",
+                "lastName": "Adams",
+                "department": "Software Development",
+"thumbnailPhotoLocation": "https://s3.amazonaws.com/com.rapid7.razor.public/thumbnail/e2cef714-f5ae-4659-8138-76fd6a1d50d0/5102c9fcdbb49450e4a1b83d82800d1a.jpg"
+            }, {
+                "id":"ef2e0a11-7fee-4b9b-ad01-cada56a7d3e1","department":"Software Development","firstName":"Khyati","lastName":"Shrivastava","thumbnailPhotoLocation":null
+            }, {
+                "id": "390191ef-0d20-44ce-ac33-3637e29ef736",
+                "firstName": "Dan",
+                "lastName": "Orzechowski",
+                "department": "Products",
+"thumbnailPhotoLocation": null
+            }, {
+                "id": "e95939a0-f0f7-4a6e-ae14-1c0363123cc3",
+                "firstName": "Brian",
+                "lastName": "Gaffey",
+                "department": "Products",
+"thumbnailPhotoLocation": "https://s3.amazonaws.com/com.rapid7.razor.public/thumbnail/e2cef714-f5ae-4659-8138-76fd6a1d50d0/14f8ef9e73a00ccbc5310fa85bacb2ce.jpg"
+            }])
+            .end();
+    }
+    else if (req.params.id && req.params.id !== "search") {
         console.log("find by key:",req.params.id);
 
         res.status(200)
             .json({
-                "id": req.params.id,
+                "id": "6042533b-f529-4da1-8775-a1c35ae91e7a",
                 "firstName": "Sam",
-                "lastName": "Adams"
+                "lastName": "Adams",
+                "department": "Software Development",
+"thumbnailPhotoLocation": "https://s3.amazonaws.com/com.rapid7.razor.public/thumbnail/e2cef714-f5ae-4659-8138-76fd6a1d50d0/5102c9fcdbb49450e4a1b83d82800d1a.jpg"
             })
-            .end();
-    }
-    else if (req.query.name) {
-        res.status(200)
-            .json([{
-                "id": "0",
-                "firstName": "Sam",
-                "lastName": "Adams"
-            }, {
-                "id": "1",
-                "firstName": "Dan",
-                "lastName": "Orzechowski"
-            }, {
-                "id": "2",
-                "firstName": "Brian",
-                "lastName": "Gaffey"
-            }])
             .end();
     }
     else {

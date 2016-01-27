@@ -5,30 +5,23 @@ import NominationModel from "./NominationModel";
 
 const NominationChooser = PickrView.extend({
     template: "templates/nominations.html",
+    className: "nomination-view",
 
     events: {
         "click .pick": "onSelectNomination",
-        "click .submit-pick": "onSubmitNomination"
+        "click .submit-nomination": "onSubmitNomination"
     },
 
     initialize() {
-        this.pickModel = new NominationModel();
-    },
-
-    onSelectNomination(event) {
-        const pickType = $(event.currentTarget).attr("data-type");
-        console.log(pickType);
-        this.$(".why")
-            .removeClass("hidden");
-        this.$(".note")
-            .focus();
+        this.nominationModel = new NominationModel();
     },
 
     onSubmitNomination(event) {
-        this.pickModel.set("receiverId", this.model.get("id"));
-        this.pickModel.set("giverId", "1");
-        this.pickModel.set("comment", this.$(".note").val());
-        this.pickModel.save({
+        this.nominationModel.set("receiverId", this.model.get("id"));
+        this.nominationModel.set("giverId", "1");
+        this.nominationModel.set("comment", this.$(".note").val());
+        this.nominationModel.set("award", $("input[checked]").attr("data-type"));
+        this.nominationModel.save({}, {
             success: () => {
                 Backbone.navigate("home", {
                     trigger: true

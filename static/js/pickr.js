@@ -65,6 +65,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	__webpack_require__(88);
+	__webpack_require__(97);
 
 	var app = new _PickrApp2.default();
 
@@ -73,7 +74,7 @@
 	_backbone2.default.navigate = app.navigate;
 	_backbone2.default.history.start();
 
-	app.navigate("landing", {
+	app.navigate(window.location.hash || "home", {
 	    trigger: true
 	});
 
@@ -28167,12 +28168,12 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	//const host = "http://triforce.cam.rapid7.com:8053/";
-	var host = "";
+	var host = "http://triforce.cam.rapid7.com:8053/";
+	//const host = "";
 
 	var HomeModel = _backbone2.default.Model.extend({
 	    url: function url() {
-	        return host + "api/1/people?name=" + (this.get("searchString") ? this.get("searchString") : "");
+	        return host + "api/1/people/search?namePrefix=" + (this.get("searchString") ? this.get("searchString") : "");
 	    }
 	});
 
@@ -28270,7 +28271,7 @@
 
 	var PersonModel = _backbone2.default.Model.extend({
 	    url: function url() {
-	        return "api/1/people/" + this.get("id");
+	        return "http://triforce.cam.rapid7.com:8053/api/1/people/" + this.get("id");
 	    }
 	});
 
@@ -28335,26 +28336,22 @@
 
 	var NominationChooser = _PickrView2.default.extend({
 	    template: "templates/nominations.html",
+	    className: "nomination-view",
 
 	    events: {
 	        "click .pick": "onSelectNomination",
-	        "click .submit-pick": "onSubmitNomination"
+	        "click .submit-nomination": "onSubmitNomination"
 	    },
 
 	    initialize: function initialize() {
-	        this.pickModel = new _NominationModel2.default();
-	    },
-	    onSelectNomination: function onSelectNomination(event) {
-	        var pickType = $(event.currentTarget).attr("data-type");
-	        console.log(pickType);
-	        this.$(".why").removeClass("hidden");
-	        this.$(".note").focus();
+	        this.nominationModel = new _NominationModel2.default();
 	    },
 	    onSubmitNomination: function onSubmitNomination(event) {
-	        this.pickModel.set("receiverId", this.model.get("id"));
-	        this.pickModel.set("giverId", "1");
-	        this.pickModel.set("comment", this.$(".note").val());
-	        this.pickModel.save({
+	        this.nominationModel.set("receiverId", this.model.get("id"));
+	        this.nominationModel.set("giverId", "1");
+	        this.nominationModel.set("comment", this.$(".note").val());
+	        this.nominationModel.set("award", $("input[checked]").attr("data-type"));
+	        this.nominationModel.save({}, {
 	            success: function success() {
 	                _backbone2.default.navigate("home", {
 	                    trigger: true
@@ -28434,7 +28431,7 @@
 /* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {"use strict";
+	"use strict";
 
 	var _backbone = __webpack_require__(71);
 
@@ -28452,26 +28449,20 @@
 
 	var PickChooser = _PickrView2.default.extend({
 	    template: "templates/picks.html",
+	    className: "pick-view",
 
 	    events: {
-	        "click .pick": "onSelectPick",
 	        "click .submit-pick": "onSubmitPick"
 	    },
 
 	    initialize: function initialize() {
 	        this.pickModel = new _PickModel2.default();
 	    },
-	    onSelectPick: function onSelectPick(event) {
-	        var pickType = $(event.currentTarget).attr("data-type");
-	        console.log(pickType);
-	        this.$(".why").removeClass("hidden");
-	        this.$(".note").focus();
-	    },
 	    onSubmitPick: function onSubmitPick(event) {
 	        this.pickModel.set("receiverId", this.model.get("id"));
-	        this.pickModel.set("giverId", "1");
+	        this.pickModel.set("giverId", "e95939a0-f0f7-4a6e-ae14-1c0363123cc3");
 	        this.pickModel.set("comment", this.$(".note").val());
-	        this.pickModel.save({
+	        this.pickModel.save({}, {
 	            success: function success() {
 	                _backbone2.default.navigate("home", {
 	                    trigger: true
@@ -28487,7 +28478,6 @@
 	});
 
 	module.exports = PickChooser;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
 
 /***/ },
 /* 87 */
@@ -28503,6 +28493,7 @@
 
 	var PickModel = _backbone2.default.Model.extend({
 	    url: "http://triforce.cam.rapid7.com:8053/api/1/guitar"
+	    //    url: "api/1/guitar"
 	});
 
 	module.exports = PickModel;
@@ -28886,6 +28877,133 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 97 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(jQuery) {/* ========================================================================
+	 * Bootstrap: button.js v3.3.6
+	 * http://getbootstrap.com/javascript/#buttons
+	 * ========================================================================
+	 * Copyright 2011-2015 Twitter, Inc.
+	 * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+	 * ======================================================================== */
+
+
+	+function ($) {
+	  'use strict';
+
+	  // BUTTON PUBLIC CLASS DEFINITION
+	  // ==============================
+
+	  var Button = function (element, options) {
+	    this.$element  = $(element)
+	    this.options   = $.extend({}, Button.DEFAULTS, options)
+	    this.isLoading = false
+	  }
+
+	  Button.VERSION  = '3.3.6'
+
+	  Button.DEFAULTS = {
+	    loadingText: 'loading...'
+	  }
+
+	  Button.prototype.setState = function (state) {
+	    var d    = 'disabled'
+	    var $el  = this.$element
+	    var val  = $el.is('input') ? 'val' : 'html'
+	    var data = $el.data()
+
+	    state += 'Text'
+
+	    if (data.resetText == null) $el.data('resetText', $el[val]())
+
+	    // push to event loop to allow forms to submit
+	    setTimeout($.proxy(function () {
+	      $el[val](data[state] == null ? this.options[state] : data[state])
+
+	      if (state == 'loadingText') {
+	        this.isLoading = true
+	        $el.addClass(d).attr(d, d)
+	      } else if (this.isLoading) {
+	        this.isLoading = false
+	        $el.removeClass(d).removeAttr(d)
+	      }
+	    }, this), 0)
+	  }
+
+	  Button.prototype.toggle = function () {
+	    var changed = true
+	    var $parent = this.$element.closest('[data-toggle="buttons"]')
+
+	    if ($parent.length) {
+	      var $input = this.$element.find('input')
+	      if ($input.prop('type') == 'radio') {
+	        if ($input.prop('checked')) changed = false
+	        $parent.find('.active').removeClass('active')
+	        this.$element.addClass('active')
+	      } else if ($input.prop('type') == 'checkbox') {
+	        if (($input.prop('checked')) !== this.$element.hasClass('active')) changed = false
+	        this.$element.toggleClass('active')
+	      }
+	      $input.prop('checked', this.$element.hasClass('active'))
+	      if (changed) $input.trigger('change')
+	    } else {
+	      this.$element.attr('aria-pressed', !this.$element.hasClass('active'))
+	      this.$element.toggleClass('active')
+	    }
+	  }
+
+
+	  // BUTTON PLUGIN DEFINITION
+	  // ========================
+
+	  function Plugin(option) {
+	    return this.each(function () {
+	      var $this   = $(this)
+	      var data    = $this.data('bs.button')
+	      var options = typeof option == 'object' && option
+
+	      if (!data) $this.data('bs.button', (data = new Button(this, options)))
+
+	      if (option == 'toggle') data.toggle()
+	      else if (option) data.setState(option)
+	    })
+	  }
+
+	  var old = $.fn.button
+
+	  $.fn.button             = Plugin
+	  $.fn.button.Constructor = Button
+
+
+	  // BUTTON NO CONFLICT
+	  // ==================
+
+	  $.fn.button.noConflict = function () {
+	    $.fn.button = old
+	    return this
+	  }
+
+
+	  // BUTTON DATA-API
+	  // ===============
+
+	  $(document)
+	    .on('click.bs.button.data-api', '[data-toggle^="button"]', function (e) {
+	      var $btn = $(e.target)
+	      if (!$btn.hasClass('btn')) $btn = $btn.closest('.btn')
+	      Plugin.call($btn, 'toggle')
+	      if (!($(e.target).is('input[type="radio"]') || $(e.target).is('input[type="checkbox"]'))) e.preventDefault()
+	    })
+	    .on('focus.bs.button.data-api blur.bs.button.data-api', '[data-toggle^="button"]', function (e) {
+	      $(e.target).closest('.btn').toggleClass('focus', /^focus(in)?$/.test(e.type))
+	    })
+
+	}(jQuery);
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
 
 /***/ }
 /******/ ]);

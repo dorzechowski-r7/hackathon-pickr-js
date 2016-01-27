@@ -1,4 +1,57 @@
-<div>
-  <div class="nomination" data-type="moose-mvp">MVP</div>
-  <div class="nomination" data-type="rockstar">Best Dressed Moose</div>
+<div class="container-fluid">
+  <div class="row text-center">
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-primary active">
+        <input type="radio" name="nomination" data-type="ROCK_STAR" checked></input>
+        <div>
+          <img src="images/star.png" class="nom" />
+        </div>
+        <div>
+          Rockstar
+        </div>
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" name="nomination" data-type="ONE_MOOSE"></input>
+        <div>
+          <img src="images/moose.png" class="nom" />
+        </div>
+        <div>
+          One Moose
+        </div>
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" name="nomination" data-type="CAPTAIN_R7"></input>
+        <div>
+          <img src="images/captain.png" class="nom" />
+        </div>
+        <div>
+          Captain R7
+        </div>
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" name="nomination" data-type="EDISON"></input>
+        <div>
+          <img src="images/lightbulb.png" class="nom" />
+        </div>
+        <div>
+          Edison
+        </div>
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" name="nomination" data-type="EVOLUTION"></input>
+        <input type="radio" name="nomination" data-type="EDISON"></input>
+        <div>
+          <img src="images/evolution.png" class="nom" />
+        </div>
+        <div>
+          Evolution
+        </div>
+      </label>
+  </div>
+</div>
+<div class="note-container text-center">
+  <textarea class="note" placeholder="tell us why <%= model.get('firstName') %> deserves this nomination"></textarea>
+</div>
+<div class="text-center">
+  <button class="button btn submit-nomination">OK!</button>
 </div>

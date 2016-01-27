@@ -1,6 +1,14 @@
-<div class="first-name">
-  <%= model.get("firstName") %>
+<div class="profile pull-left">
+   <% if (model.get("thumbnailPhotoLocation") && model.get("thumbnailPhotoLocation") !== "null") { %>
+      <img src="<%= model.get('thumbnailPhotoLocation') %>" />
+   <% } else { %>
+   <img src="images/default-user.png" />
+   <% } %>
 </div>
-<div class="last-name">
-  <%= model.get("lastName") %>
+<div class="name">
+  <%= model.get("firstName") %> <%= model.get("lastName") %>
 </div>
+<div class="dept">
+  <%= model.get("department") %>
+</div>
+<div class="clearfix cf"></div>

@@ -1,0 +1,9 @@
+import Backbone from "backbone";
+
+import PickrView from "./PickrView";
+
+const PickChooser = PickrView.extend({
+    template: "templates/picks.html"
+});
+
+module.exports = PickChooser;

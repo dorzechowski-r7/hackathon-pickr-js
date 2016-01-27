@@ -1,0 +1,32 @@
+import _ from "lodash";
+import Backbone from "backbone";
+
+export default class PickrView extends Backbone.View {
+    constructor() {
+        super();
+
+        this.render = _.bind(this.render, this);
+    }
+
+    render() {
+        const renderFn = () => {
+            this.$el.html(this.templateFn({
+                model: this.model
+            }));
+        };
+
+        if (this.templateFn) {
+            renderFn();
+        }
+        else if (this.template) {
+            $.get(this.template)
+                .done((templateData) => {
+                    this.templateFn = _.template(templateData);
+                    renderFn();
+                })
+        }
+        else if (this.templateHTML) {
+            this.$el.html(this.templateHTML);
+        }
+    }            
+};

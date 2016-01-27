@@ -1,0 +1,7 @@
+<div>
+  <div class="pick pick-yellow">yellow</div>
+  <div class="pick pick-blue">blue</div>
+  <div class="pick pick-green">green</div>
+  <div class="pick pick-purple">purple</div>
+  <div class="pick pick-navy">navy</div>
+</div>

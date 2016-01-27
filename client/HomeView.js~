@@ -1,0 +1,19 @@
+import PickrView from "./PickrView";
+
+//require("bootstrap.min.css");
+
+const LandingView = PickrView.extend({
+    template: "templates/main.html",
+
+    events: {
+        "click": "onUserImageClick"
+    },
+
+    onUserImageClick(event) {
+        Backbone.navigate("home", {
+            trigger: true
+        });
+    }
+});
+
+module.exports = LandingView;

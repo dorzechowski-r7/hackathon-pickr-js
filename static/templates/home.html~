@@ -1,0 +1,7 @@
+<div class="entry">
+  <span>Who is awesome?</span>
+</div>
+<div>
+  <input type="text" class="people-entry" />
+</div>
+<div class="people-list"></div>

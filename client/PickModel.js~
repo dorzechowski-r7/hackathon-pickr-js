@@ -1,0 +1,7 @@
+import Backbone from "backbone";
+
+const PickModel = Backbone.Model.extend({
+    url: "api/1/guitar"
+});
+
+module.exports = PickModel;

@@ -1,0 +1,40 @@
+#app {
+    width: 75%;
+    min-height: 100%;
+    min-height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+
+    background: #969eaa; /* Old browsers */
+    background: -moz-linear-gradient(45deg, #969eaa 0%, #e4eef4 50%, #b9d5e9 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(45deg, #969eaa 0%,#e4eef4 50%,#b9d5e9 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(45deg, #969eaa 0%,#e4eef4 50%,#b9d5e9 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#969eaa', endColorstr='#b9d5e9',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.search-result {
+    margin-bottom: 8px;
+    border-bottom: 1px solid green;
+    cursor: pointer;
+}
+
+.home-view .container {
+    min-height: 100%;
+    min-height: 100vh;
+    display: flex;
+}
+
+.home-view .entry {
+    text-align: center;
+}
+
+.home-view .entry input {
+    width: 100%;
+}
+
+.person-view .row > div {
+}
+
+.hidden {
+    display: none;
+}

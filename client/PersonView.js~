@@ -1,0 +1,9 @@
+import Backbone from "backbone";
+
+import PickrView from "./PickrView";
+
+const PersonView = PickrView.extend({
+    template: "templates/person.html"
+});
+
+module.exports = PersonView;

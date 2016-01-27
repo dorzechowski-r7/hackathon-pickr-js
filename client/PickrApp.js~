@@ -1,0 +1,12 @@
+import Backbone from "backbone";
+
+import PickrView from "./PickrView";
+
+export default class PickrApp extends PickrView {
+    constructor() {
+        super();
+
+        this.className = "main-view";
+        this.template = "templates/main.html";
+    }
+};

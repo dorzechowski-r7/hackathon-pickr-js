@@ -1,0 +1,15 @@
+import Backbone from "backbone";
+
+import HomeView from "./HomeView";
+
+const PickrRouter = Backbone.Router.extend({
+    routes: {
+        "home": "onHome"
+    },
+
+    onHome() {
+        app.show(new HomeView());
+    }
+});
+
+module.exports = PickrRouter;

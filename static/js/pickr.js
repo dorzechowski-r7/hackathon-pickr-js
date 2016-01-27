@@ -28348,19 +28348,23 @@
 	    },
 	    onSubmitNomination: function onSubmitNomination(event) {
 	        this.nominationModel.set("receiverId", this.model.get("id"));
-	        this.nominationModel.set("giverId", "1");
+	        this.nominationModel.set("giverId", "e95939a0-f0f7-4a6e-ae14-1c0363123cc3");
 	        this.nominationModel.set("comment", this.$(".note").val());
 	        this.nominationModel.set("award", $("input[checked]").attr("data-type"));
 	        this.nominationModel.save({}, {
 	            success: function success() {
-	                _backbone2.default.navigate("home", {
-	                    trigger: true
-	                });
+	                $(".msg").text("nomination submitted!");
+	                setTimeout(function () {
+	                    _backbone2.default.navigate("home", {
+	                        trigger: true
+	                    });
+	                }, 1250);
 	            },
 	            error: function error() {
-	                _backbone2.default.navigate("home", {
-	                    trigger: true
-	                });
+	                $(".msg").text("oh no!  an error occurred, try again later.");
+	                setTimeout(function () {
+	                    $(".msg").text("");
+	                }, 3000);
 	            }
 	        });
 	    }
@@ -28431,7 +28435,7 @@
 /* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	/* WEBPACK VAR INJECTION */(function($) {"use strict";
 
 	var _backbone = __webpack_require__(71);
 
@@ -28464,20 +28468,25 @@
 	        this.pickModel.set("comment", this.$(".note").val());
 	        this.pickModel.save({}, {
 	            success: function success() {
-	                _backbone2.default.navigate("home", {
-	                    trigger: true
-	                });
+	                $(".msg").text("pick submitted!");
+	                setTimeout(function () {
+	                    _backbone2.default.navigate("home", {
+	                        trigger: true
+	                    });
+	                }, 1250);
 	            },
 	            error: function error() {
-	                _backbone2.default.navigate("home", {
-	                    trigger: true
-	                });
+	                $(".msg").text("oh no!  an error occurred, try again later.");
+	                setTimeout(function () {
+	                    $(".msg").text("");
+	                }, 3000);
 	            }
 	        });
 	    }
 	});
 
 	module.exports = PickChooser;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
 
 /***/ },
 /* 87 */

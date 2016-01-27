@@ -21,14 +21,18 @@ const PickChooser = PickrView.extend({
         this.pickModel.set("comment", this.$(".note").val());
         this.pickModel.save({}, {
             success: () => {
-                Backbone.navigate("home", {
-                    trigger: true
-                });
+                $(".msg").text("pick submitted!");
+                setTimeout(() => {
+                    Backbone.navigate("home", {
+                        trigger: true
+                    });
+                }, 1250);
             },
             error: () => {
-                Backbone.navigate("home", {
-                    trigger: true
-                });
+                $(".msg").text("oh no!  an error occurred, try again later.");
+                setTimeout(() => {
+                    $(".msg").text("");
+                }, 3000);
             }
         });
     }
